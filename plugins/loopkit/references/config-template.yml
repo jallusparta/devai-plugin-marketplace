@@ -1,0 +1,24 @@
+# LoopKit local config template.
+# Copy to <state_dir>/config.yml in the target repository or workspace.
+
+state_dir: .loopkit
+
+defaults:
+  preset: none
+  external_writes: ask # never | ask | allowed
+  commit_policy:
+    default: ask # never | ask | per_module | per_fix | per_task
+
+modules: []
+
+presets: {}
+
+tracker:
+  type: none # none | gitlab | github | jira | linear | custom
+  external_writes: ask
+
+context:
+  compact_after_module_threshold: 0.4
+  compact_summary_file: context-summary.md
+
+commands: {}

@@ -1,0 +1,14 @@
+{
+  "name": "devai-plugin-marketplace",
+  "description": "DevAI marketplace for reusable AI workflow plugins and cross-agent skills.",
+  "owner": {
+    "name": "DevAI"
+  },
+  "plugins": [
+    {
+      "name": "loopkit",
+      "source": "./plugins/loopkit",
+      "description": "Configurable local workflow loops for AI coding agents."
+    }
+  ]
+}

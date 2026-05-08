@@ -1,0 +1,5 @@
+.DS_Store
+.loopkit/
+node_modules/
+dist/
+build/
