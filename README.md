@@ -35,14 +35,14 @@ OpenCode/Codex skills:
 From Claude Code:
 
 ```text
-/plugin marketplace add /Users/apartanen/Development/devai-plugin-marketplace
+/plugin marketplace add https://github.com/jallusparta/devai-plugin-marketplace
 /plugin install loopkit@devai-plugin-marketplace
 ```
 
 For validation:
 
 ```sh
-claude plugin validate /Users/apartanen/Development/devai-plugin-marketplace
+claude plugin validate https://github.com/jallusparta/devai-plugin-marketplace
 ```
 
 ## OpenCode / Codex Local Use
