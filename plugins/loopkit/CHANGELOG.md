@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0
+
+- Added canonical module ordering from configured module registration order.
+- Added guidance for semantically inserting extra selected modules without overusing `requires`.
+- Added TDD module ordering examples for mixed implementation workflows.
+
 ## 0.2.0
 
 - Added explicit orchestrator ownership rules for `/loopkit:run`.
