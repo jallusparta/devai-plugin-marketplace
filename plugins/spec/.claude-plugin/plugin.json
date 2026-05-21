@@ -1,0 +1,8 @@
+{
+  "name": "spec",
+  "description": "Lightweight intent, design, and bug specification skills for product and engineering teams.",
+  "version": "0.1.0",
+  "author": {
+    "name": "devai"
+  }
+}
