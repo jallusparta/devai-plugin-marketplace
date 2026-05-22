@@ -12,7 +12,7 @@ Shared routing and clarification rules: `../../references/workflow-rules.md`.
 
 ## Working With Existing Issues
 
-When refining an existing issue, keep the intent or overview unchanged unless the user explicitly asks to modify it. Focus on adding requirements, acceptance criteria, scope boundaries, and edge cases.
+When refining an existing issue, preserve any existing intent or overview verbatim unless the user explicitly asks to change it. If the issue already has an intent or overview section, do not rewrite, shorten, or replace that section. Add design content after it and focus on requirements, acceptance criteria, scope boundaries, and edge cases.
 
 When updating a tracker issue, keep implementation details out of the issue description. Technical plans, root-cause analysis, and code references belong in comments or separate technical notes.
 
