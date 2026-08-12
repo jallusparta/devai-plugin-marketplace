@@ -68,6 +68,13 @@ Communication is owned by modules, not a separate global layer. Modules may prod
 
 The orchestrator may delegate a module or bounded module subtask to a subagent, but never the entire LoopKit run.
 
+Delegate to the LoopKit agent types so the delegation is visible and self-explaining in the host UI:
+
+- `loopkit-gate` for modules with `type: gate`
+- `loopkit-module` for `task`, `handoff`, `report`, and `custom` modules
+
+Label every delegation `<module-id>: <short action>`, for example `lint: run eslint and fix violations`. Retries reuse the label with an attempt suffix. See `progress-display.md`.
+
 Delegated prompts must state:
 
 - this is one LoopKit module or subtask, not a generic implementation request

@@ -17,10 +17,11 @@ LoopKit runs configurable local workflow loops made of modules.
 2. Capture input into the run state.
 3. Ask which modules to execute.
 4. Resolve module dependencies.
-5. Execute modules in dependency order, parallelizing only when safe.
-6. Write module attempts, events, and debug summaries.
-7. Apply commit policy.
-8. Produce a final local report.
+5. Mirror the selected modules into the host task list.
+6. Execute modules in dependency order, parallelizing only when safe.
+7. Write module attempts, events, and debug summaries.
+8. Apply commit policy.
+9. Produce a final local report.
 
 ## Orchestrator Ownership
 
@@ -33,6 +34,7 @@ The orchestrator owns:
 - module selection and dependency ordering
 - global run state files
 - external write approvals
+- the host task list mirror and delegation labels described in `progress-display.md`
 - final reporting
 
 Subagents may be used for one bounded module or module subtask at a time. They should not own the run, select additional modules, or assume slash-command execution semantics. They return structured results to the orchestrator, and the orchestrator records those results in local state.
@@ -42,13 +44,14 @@ Subagents may be used for one bounded module or module subtask at a time. They s
 For each module:
 
 1. Read only the relevant run state and module instructions.
-2. Execute the module procedure.
-3. Record all commands, decisions, failures, fixes, and evidence.
-4. Apply the module commit policy.
-5. Update module status.
-6. Persist the module attempt report, events, debug notes, and context summary.
-7. Check context usage. If it is greater than 40%, compact before continuing and record the compaction event.
-8. Continue, retry, or stop according to pass criteria and blockers.
+2. Mark the module task `in_progress` and append the `started` event.
+3. Execute the module procedure.
+4. Record all commands, decisions, failures, fixes, and evidence.
+5. Apply the module commit policy.
+6. Update module status and complete the module task with its terminal event.
+7. Persist the module attempt report, events, debug notes, and context summary.
+8. Check context usage. If it is greater than 40%, compact before continuing and record the compaction event.
+9. Continue, retry, or stop according to pass criteria and blockers.
 
 ## Context Compaction
 

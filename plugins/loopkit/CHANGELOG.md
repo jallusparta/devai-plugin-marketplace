@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0
+
+- Added host task list mirroring so the running module is visible in the tool UI.
+- Added `loopkit-module` and `loopkit-gate` agents so delegated modules render as named, self-explaining subagents.
+- Added `references/progress-display.md` and a `delegated` observability event.
+
 ## 0.3.0
 
 - Added canonical module ordering from configured module registration order.

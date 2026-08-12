@@ -14,6 +14,7 @@ Reference files:
 - `../../references/state.md` for run state.
 - `../../references/observability.md` for events and debug output.
 - `../../references/module-contract.md` for module execution rules.
+- `../../references/progress-display.md` for host task list and subagent labelling.
 
 ## Workflow
 
@@ -23,12 +24,13 @@ Reference files:
 4. Snapshot the source input to `input.md` and initialize `manifest.yml`, `modules.yml`, `events.jsonl`, `state.md`, `debug.md`, and `context-summary.md`.
 5. Ask which modules should execute using the selection flow in `run-selection.md`.
 6. Resolve module dependencies and safe parallelization.
-7. Execute selected modules according to their module contracts. The orchestrator may delegate one bounded module or module subtask at a time, but it keeps ownership of run state.
-8. Record every module start, result, failure, fix, commit, skip, external write, and compaction checkpoint in `events.jsonl`.
-9. Write module attempt reports under `module-runs/<module-id>/`.
-10. Maintain `state.md`, `debug.md`, and `context-summary.md` as the run progresses.
-11. At the end of each module, persist module results first, then check context usage. If context usage is greater than 40%, compact before continuing and record the compaction.
-12. Produce or update `final-report.md` when selected modules complete or the run stops.
+7. Mirror the selected modules into the host task list in dependency order, following `progress-display.md`.
+8. Execute selected modules according to their module contracts. The orchestrator may delegate one bounded module or module subtask at a time, but it keeps ownership of run state. Delegate with the LoopKit agent types and module-named descriptions from `progress-display.md`.
+9. Record every module start, result, failure, fix, commit, skip, external write, and compaction checkpoint in `events.jsonl`, and flip the module's task status in the same step.
+10. Write module attempt reports under `module-runs/<module-id>/`.
+11. Maintain `state.md`, `debug.md`, and `context-summary.md` as the run progresses.
+12. At the end of each module, persist module results first, then check context usage. If context usage is greater than 40%, compact before continuing and record the compaction. Rebuild the task list from `modules.yml` after compaction.
+13. Produce or update `final-report.md` when selected modules complete or the run stops.
 
 ## Guardrails
 
@@ -37,6 +39,8 @@ Reference files:
 - Do not start implementation until the config has been read and the run directory exists.
 - The orchestrator owns `manifest.yml`, `modules.yml`, `events.jsonl`, `state.md`, `debug.md`, `context-summary.md`, and `final-report.md`.
 - Subagents may execute only one scoped module or module subtask. They return structured results; the orchestrator persists global run state.
+- Delegate modules to `loopkit-module` or `loopkit-gate`, never to a generic agent, and label each delegation `<module-id>: <short action>`.
+- The host task list is a mirror of `modules.yml`. Never let it drift, and never treat it as run state.
 - Do not assume implementation is required. Run only selected modules.
 - Do not invent default modules if none are configured.
 - Do not post externally unless a selected module requests it, config allows it, and approval rules are satisfied.

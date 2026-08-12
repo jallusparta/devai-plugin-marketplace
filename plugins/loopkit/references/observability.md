@@ -20,6 +20,12 @@ Example events:
 {"ts":"2026-05-07T10:25:00Z","module":"lint","event":"context_compaction","threshold":0.4,"usage_before":"estimated >40%","summary_path":"context-summary.md"}
 ```
 
+Record delegations too, so a subagent panel in the host UI can be matched to the run afterwards:
+
+```json
+{"ts":"2026-05-07T10:15:00Z","module":"lint","event":"delegated","attempt":1,"agent":"loopkit-gate","label":"lint: run eslint and fix violations"}
+```
+
 ## Module Attempts
 
 Each module attempt should write a concise report:
