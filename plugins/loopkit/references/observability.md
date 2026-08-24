@@ -23,7 +23,7 @@ Example events:
 Record delegations too, so a subagent panel in the host UI can be matched to the run afterwards:
 
 ```json
-{"ts":"2026-05-07T10:15:00Z","module":"lint","event":"delegated","attempt":1,"agent":"loopkit-gate","label":"lint: run eslint and fix violations"}
+{"ts":"2026-05-07T10:15:00Z","module":"lint","event":"delegated","attempt":1,"agent":"loopkit-gate","model":"inherit","isolation":"none","label":"lint: run eslint and fix violations"}
 ```
 
 ## Module Attempts

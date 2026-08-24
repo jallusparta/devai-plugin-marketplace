@@ -30,6 +30,15 @@ After selection:
 7. If two valid insertion points exist, ask one short question instead of guessing.
 8. Determine which modules can run in parallel.
 9. Serialize modules that may edit the same files or have unclear interaction.
+10. Resolve the agent, model, and isolation for each selected module using the execution resolution order in `module-contract.md`, and record the result in `modules.yml`.
+
+## Run-Level Execution Overrides
+
+The user may state an execution preference for a whole run or for single modules, for example "run this loop on the fast model" or "run the review module with the code-reviewer agent". Such an instruction wins over module frontmatter and config defaults for that run only.
+
+- Apply the override to `modules.yml` for this run. Never write it back into module files or the config unless the user asks for that.
+- Confirm the resolved choices once, in one line, when they differ from the defaults.
+- Do not ask about agents or models when nothing overrides the defaults. Silence is the normal case.
 
 ## Ordering Examples
 

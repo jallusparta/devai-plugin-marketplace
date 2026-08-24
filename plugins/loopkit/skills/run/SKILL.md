@@ -39,7 +39,8 @@ Reference files:
 - Do not start implementation until the config has been read and the run directory exists.
 - The orchestrator owns `manifest.yml`, `modules.yml`, `events.jsonl`, `state.md`, `debug.md`, `context-summary.md`, and `final-report.md`.
 - Subagents may execute only one scoped module or module subtask. They return structured results; the orchestrator persists global run state.
-- Delegate modules to `loopkit-module` or `loopkit-gate`, never to a generic agent, and label each delegation `<module-id>: <short action>`.
+- Delegate modules to the agent resolved for the module, never to a generic agent, and label each delegation `<module-id>: <short action>`.
+- Resolve agent, model, and isolation per module before execution. A missing agent type falls back to the built-in default with one warning; it never fails the run.
 - The host task list is a mirror of `modules.yml`. Never let it drift, and never treat it as run state.
 - Do not assume implementation is required. Run only selected modules.
 - Do not invent default modules if none are configured.

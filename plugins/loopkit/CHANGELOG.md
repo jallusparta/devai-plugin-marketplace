@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.7.0
+
+- Added OpenCode V2 adapter guidance for module selection, bounded agent delegation, and progress reporting.
+- Documented the OpenCode V2 `skills` and `agents` configuration shape.
+
+## 0.6.0
+
+- Built-in `loopkit-module` and `loopkit-gate` agents now inherit the host session model by default.
+- Setup asks for the delegated module model and recommends `sonnet` without translating host-specific model names.
+
+## 0.5.0
+
+- Added optional per-module `agent`, `model`, and `isolation` execution frontmatter.
+- Added `defaults.execution` config block and run-level execution overrides.
+- Added execution resolution order, host-portability rules, and resolved execution details in the `delegated` event.
+
 ## 0.4.0
 
 - Added host task list mirroring so the running module is visible in the tool UI.

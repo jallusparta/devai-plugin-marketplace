@@ -25,6 +25,7 @@ Reference files:
    - commit policy override, if any
    - whether it produces external communication
    - pass criteria
+   - agent, model, or isolation overrides, only if the user brings them up or the module clearly needs a different execution profile
 4. Draft the module as a small Markdown file using `module-contract.md`.
 5. Keep module instructions plain and tool-portable.
 6. Update config module references only when the user wants the module enabled or registered.
@@ -32,6 +33,7 @@ Reference files:
 ## Design Rules
 
 - Keep modules narrow.
+- Leave `agent`, `model`, and `isolation` unset unless the module has a real reason to differ. Defaults keep modules portable across tools.
 - Do not encode organization-specific assumptions unless the user wants them.
 - Put communication expectations inside the module only when the module produces a handoff artifact or external update.
 - Put observability requirements in the module so debug output is consistent.

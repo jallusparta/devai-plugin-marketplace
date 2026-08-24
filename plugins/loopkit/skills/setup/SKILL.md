@@ -20,9 +20,10 @@ Reference files:
 2. Check whether a LoopKit config already exists in the configured or default state directory.
 3. If no config exists, run the quick setup wizard from `setup-wizard.md`.
 4. If a config exists, ask whether to view, update, or replace it.
-5. Keep setup local. Do not create external tracker comments or commits unless the user explicitly asks.
-6. Write or update `<state_dir>/config.yml`.
-7. If the user wants initial modules, route to `/loopkit:module` after config is created.
+5. Ask for the delegated module model. Recommend `sonnet`, but accept `inherit` or an opaque host-specific model name. Do not translate model names in the portable config.
+6. Keep setup local. Do not create external tracker comments or commits unless the user explicitly asks.
+7. Write or update `<state_dir>/config.yml`.
+8. If the user wants initial modules, route to `/loopkit:module` after config is created.
 
 ## Output
 

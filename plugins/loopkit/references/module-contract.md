@@ -24,6 +24,35 @@ communication:
 outputs: []
 ```
 
+## Optional Execution Frontmatter
+
+A module may declare how it should be executed. All fields are optional and default to `inherit`.
+
+```yaml
+agent: inherit # inherit | loopkit-module | loopkit-gate | any agent type registered in the host tool
+model: inherit # inherit | a model name the host tool accepts
+isolation: none # none | worktree
+```
+
+Use these when a module has a genuinely different execution need, for example a cheap fast model for a mechanical gate, a stronger model for design or review work, or worktree isolation for a module that rewrites many files. Leave them out otherwise. `inherit` is the portable default and keeps the module working in tools that expose no model or agent selection.
+
+## Execution Resolution
+
+Resolve `agent`, `model`, and `isolation` for each module in this order, first match wins:
+
+1. An explicit run-time instruction from the user for this run or this module.
+2. The module frontmatter.
+3. `defaults.execution` in the LoopKit config.
+4. Built-in defaults: `loopkit-gate` for `type: gate`, `loopkit-module` for every other type; the host session model; no isolation.
+
+Rules:
+
+- Model names are host-specific. Treat them as opaque strings, pass them through unchanged, and never rewrite one model name into another.
+- If a configured agent type is not registered in the host tool, fall back to the built-in default, warn the user once, and continue. Never fail a run over a missing agent type.
+- If the host tool cannot select a model or agent per delegation, ignore these fields and run the module normally.
+- Record the resolved agent, model, and isolation in the `delegated` event so a run can be explained afterwards.
+- `isolation: worktree` costs setup time and disk. Use it only for modules that would otherwise conflict with parallel work.
+
 ## Body Structure
 
 ```markdown
@@ -68,7 +97,7 @@ Communication is owned by modules, not a separate global layer. Modules may prod
 
 The orchestrator may delegate a module or bounded module subtask to a subagent, but never the entire LoopKit run.
 
-Delegate to the LoopKit agent types so the delegation is visible and self-explaining in the host UI:
+Delegate using the agent, model, and isolation resolved above, so the delegation is visible and self-explaining in the host UI. With no configuration, that resolves to:
 
 - `loopkit-gate` for modules with `type: gate`
 - `loopkit-module` for `task`, `handoff`, `report`, and `custom` modules

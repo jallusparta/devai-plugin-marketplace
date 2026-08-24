@@ -11,7 +11,8 @@ Ask only what is needed to create a usable config:
 3. External writes: `never`, `ask`, or `allowed`.
 4. Default commit policy: `never`, `ask`, `per_module`, `per_fix`, or `per_task`.
 5. Default preset: `none` or a user-defined preset.
-6. Whether to create an initial module now.
+6. Delegated module model: `sonnet` (recommended), `inherit` host session model, or a host-specific model name.
+7. Whether to create an initial module now.
 
 ## Defaults
 
@@ -24,6 +25,10 @@ defaults:
   external_writes: ask
   commit_policy:
     default: ask
+  execution:
+    agent: inherit
+    model: inherit
+    isolation: none
 modules: []
 presets: {}
 tracker:
@@ -45,6 +50,7 @@ Advanced topics:
 - evidence retention
 - custom module locations
 - team-specific reporting expectations
+- default execution profile: agent, model, and isolation applied to modules that do not override them. Recommend `sonnet` for delegated work; host adapters may map it to a provider-specific model such as Terra.
 
 ## Local Only
 

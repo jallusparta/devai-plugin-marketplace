@@ -29,14 +29,22 @@ LoopKit uses a configurable local state directory, defaulting to `.loopkit/` in 
 
 See [references/state.md](references/state.md) for details.
 
+## Execution Profiles
+
+A module can declare the `agent`, `model`, and `isolation` it should run with, for example a fast model for a mechanical gate and a stronger one for review work. Config supplies the defaults, modules override them, and the user can override per run. Built-in agents inherit the host session model; setup recommends `sonnet` for delegated work when a specific default is wanted. Host adapters may map that alias to a provider-specific model.
+
+See [references/module-contract.md](references/module-contract.md) for the resolution order.
+
 ## Run Progress
 
 While a run executes, the selected modules are mirrored into the host task list, and each delegated module runs as a named `loopkit-module` or `loopkit-gate` subagent labelled with its module id. State files stay the source of truth.
+
+OpenCode V2 does not currently expose a native task-list tool. Its adapter keeps the same mirror in `modules.yml` and reports the current module as a progress line instead. Configure the two bounded agents in the host's `agents` configuration so OpenCode can delegate module and gate work by name.
 
 See [references/progress-display.md](references/progress-display.md) for details.
 
 ## Cross-Tool Use
 
-LoopKit is packaged as a Claude Code plugin first. Its skill files are written in the Agent Skills style so they can later be adapted to OpenCode and Codex.
+LoopKit is packaged as a Claude Code plugin first. Its OpenCode/Codex adapter skills are published under `.agents/skills/`, while the canonical skill instructions and shared references remain under this plugin directory.
 
 See [references/adapters.md](references/adapters.md) for compatibility notes.

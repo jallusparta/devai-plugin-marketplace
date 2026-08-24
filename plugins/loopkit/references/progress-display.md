@@ -30,7 +30,7 @@ When a module is delegated, the delegation should be visible and self-explaining
 
 Rules:
 
-- Use the LoopKit agent types, not a generic agent: `loopkit-module` for `task`, `handoff`, `report`, and `custom` modules, `loopkit-gate` for `gate` modules.
+- Use the agent resolved for the module, never a generic agent. With no configuration that is `loopkit-module` for `task`, `handoff`, `report`, and `custom` modules, and `loopkit-gate` for `gate` modules. See the execution resolution rules in `module-contract.md`.
 - The delegation description is `<module-id>: <short action>`, for example `lint: run eslint and fix violations`. No generic descriptions such as "implement the change".
 - One delegation per module or bounded module subtask. Never delegate the whole run.
 - For a fix loop, reuse the same description with an attempt suffix: `lint: fix violations (attempt 2)`.

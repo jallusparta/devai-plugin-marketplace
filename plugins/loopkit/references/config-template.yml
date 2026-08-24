@@ -8,6 +8,12 @@ defaults:
   external_writes: ask # never | ask | allowed
   commit_policy:
     default: ask # never | ask | per_module | per_fix | per_task
+  execution:
+    # Applied to every module that does not override them.
+    # Modules override per module; the user can override per run.
+    agent: inherit # inherit = pick by module type | any agent type registered in the host tool
+    model: inherit # inherit = host session model | a model name the host tool accepts
+    isolation: none # none | worktree
 
 modules: []
 
