@@ -1,6 +1,8 @@
 {
   "name": "devai-plugin-marketplace",
-  "description": "devai marketplace for reusable AI workflow plugins and cross-agent skills.",
+  "metadata": {
+    "description": "devai marketplace for reusable AI workflow plugins and cross-agent skills."
+  },
   "owner": {
     "name": "devai"
   },
@@ -14,6 +16,11 @@
       "name": "spec",
       "source": "./plugins/spec",
       "description": "Lightweight intent, design, and bug specification skills for product and engineering teams."
+    },
+    {
+      "name": "wiki",
+      "source": "./plugins/wiki",
+      "description": "Curate evidence-linked project knowledge with human review and resumable maintenance."
     }
   ]
 }

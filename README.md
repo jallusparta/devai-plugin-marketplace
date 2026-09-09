@@ -46,6 +46,41 @@ OpenCode/Codex skills:
 - `spec-design`
 - `spec-bug`
 
+### `wiki`
+
+Initialize and maintain an evidence-linked LLM wiki, with immutable sources, scoped verification, linked project documents, resumable intake, and compact human reviews.
+
+- Skills: `curate`, `submit`, `audit`.
+- Canonical instructions: `plugins/wiki/skills/<skill-name>/SKILL.md`.
+- Repository discovery: `.agents/skills/<skill-name>` symlinks to each complete canonical skill directory.
+- Includes project `AGENTS.md` generation and workflow/automation recommendations.
+- Submit captures evidence-linked inbox entries; audit reports problems read-only; curate integrates changes and prepares human reviews.
+
+`curate` handles both creation and ongoing maintenance:
+
+- **First run:** discover sources, establish goals and structure, initialize the wiki and its operating instructions, and curate the first batch.
+- **Subsequent runs:** read the configured knowledge-base location and saved checkpoint, resume unfinished ingestion, process new inbox submissions, update affected pages and relationships, and prepare a compact human review packet. It does not restart initialization when a knowledge base already exists.
+
+`submit` adds useful findings and evidence to the configured inbox. `audit` checks existing knowledge and reports issues without modifying it; it does not ingest the inbox.
+
+Try from an agent with the skills loaded:
+
+```text
+Use $curate to initialize this project's knowledge base.
+Use $submit to capture the useful findings from this task.
+Use $audit to review current goals and their supporting evidence without changing files.
+```
+
+For local Claude testing without installing or publishing:
+
+```sh
+claude --plugin-dir /absolute/path/to/devai-plugin-marketplace/plugins/wiki
+```
+
+Then invoke `/wiki:curate`, `/wiki:submit`, or `/wiki:audit`.
+
+For selected OpenCode/Codex projects, copy the complete selected canonical skill directories into that project's `.agents/skills/`, preserving `references/`, `assets/`, and `agents/` when present. Do not copy a discovery symlink without its target. Alternatively, link directly to the absolute canonical directory on the same machine. No global installation is needed. The knowledge-base destination comes from the consuming project's instructions, not this marketplace.
+
 ## Claude Code Local Install
 
 From Claude Code:

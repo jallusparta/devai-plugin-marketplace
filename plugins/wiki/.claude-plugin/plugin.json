@@ -1,0 +1,6 @@
+{
+  "name": "wiki",
+  "description": "Curate evidence-linked project knowledge with human review and resumable maintenance.",
+  "version": "0.1.0",
+  "author": { "name": "devai" }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audit Knowledge Base"
+  short_description: "Audit evidence, freshness, and knowledge integrity"
+  default_prompt: "Use $audit for this project."

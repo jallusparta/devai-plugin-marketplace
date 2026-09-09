@@ -1,0 +1,36 @@
+# Curate a bounded batch
+
+1. Read the operating contract and checkpoint. Select unprocessed inbox entries and applicable refresh triggers. Each submission should identify author/agent, task/issue, date, source artifacts, observations, interpretations, and suggested affected topics. An agent summary alone is evidence of its report, not independent proof of the underlying fact.
+2. Capture source versions, deduplicate by submission ID and content hash, and preserve originals before transforming them. Mark intake as pending, processing, incorporated, deferred, or failed; attach reasons and destination claim IDs. Incorporated means the submission is fully accounted for in checked records, including any pending or disputed claims; it does not mean all claims are approved. Track outstanding verification and human review separately so resuming does not reimport unresolved submissions. Do not mark incorporated until the integrated changes pass checks.
+3. Extract or revise scoped candidate claims. Inspect original evidence in a distinct verification pass. Apply the knowledge model's promotion rules.
+4. Follow reverse dependencies to identify affected claims and views, including goals, ADRs, experiments, and the brief. Flag downstream uncertainty when its premise changes; do not mechanically rewrite every dependent conclusion as though it were proven.
+5. Classify apparent contradictions by time, scope, terminology, policy versus practice, or genuine disagreement. Explicit prior supersession may already resolve them. Newer does not automatically mean authoritative. Preserve competing evidence; consequential unresolved conflicts await the responsible human.
+6. Incorporate eligible factual updates, preserve pending proposals separately or prominently labeled, and rebuild affected pages and indexes. A semantic change suspends prior approval for the changed version. Preserve corrections, rationale, original approval records, and superseded versions.
+7. Inspect IDs, source hashes against the previous manifest, locators/excerpts, local links, footnote/source joins, relationship targets, verification versions, access propagation, and queue accounting. If no automated validator is installed, perform and report the checks honestly; do not claim enforcement. Flag extraction limitations such as OCR uncertainty. Inspect sample generated claims against original evidence, emphasizing consequential and synthesized claims.
+8. Prepare the bounded review packet, save checkpoint and log, and report processed versus deferred coverage. Interrupted batches should resume without duplicate imports, duplicate approval requests, or silent loss of questions.
+
+## Parallel work
+
+For large/context-heavy collections, partition by source group or topic, with bounded manifests and output contracts. Extraction workers return candidate claims, exact source locators, uncertainties, and coverage. Verification workers receive original evidence plus candidate claims and independently check support. Workers write only their assigned draft area. The coordinator deduplicates entities, reconciles vocabulary, reviews cross-topic conflicts, and integrates shared indexes. No worker may manufacture human approval or resolve an authority dispute.
+
+### Keep the coordinator's context bounded
+
+The coordinator loads the brief, relevant topic/entity indexes, source manifest, current batch status, and checkpoint. Detailed source material and candidate claims stay in files. Retrieve selected evidence when checking a claim; never concatenate every worker's full output into the parent context.
+
+Before dispatch, save a batch record under `operations/batches/<batch-id>/`: task, source IDs and versions, exact assigned ranges, relevant constraints and correction IDs, dependency IDs, worker role, output paths, budget, and state. Use pending, running, completed, failed, deferred, and integrated states. A completed worker has produced artifacts; only the coordinator marks integration complete after checks. Save worker attempt IDs and failure reasons. On resume, reconcile surviving workers before retrying; do not dispatch an already-running batch twice.
+
+Start with a conservative batch, for example 3–5 short documents or one coherent section of a long source. Adapt to source length, complexity, model capacity, and observed response size. Split oversized inputs on semantic boundaries, retaining headings/context and exact locators; track overlap to deduplicate claims. Neither truncation nor sampling counts as processing the omitted material. Reduce batches when workers miss evidence or overflow their budget. Bound concurrency to available slots and review capacity; more workers must not create an unreviewable integration backlog.
+
+Give workers only assigned sources and the smallest relevant project context, not the parent's entire history or corpus. Require detailed output in their assigned files, and a return message of about 400 words or less: batch ID, artifact paths, processed/deferred coverage, key changes, conflicts, and blocking questions. If that would omit important detail, link the detail file. Verification workers inspect original evidence; compact extraction summaries are not substitutes.
+
+Integrate one bounded batch at a time. Reconcile cross-topic entities using compact alias/relationship indexes and stable IDs. Delegate targeted follow-up checks for ambiguous identities or conflicts instead of reopening whole topic corpora. Preserve durable human corrections in relevant worker packets. Do not let parallel workers update shared indexes or curated pages.
+
+Checkpoint after each integrated batch and before context pressure becomes significant: source versions/ranges covered, outstanding worker IDs and states, artifact paths, unresolved decisions, next action, and integration revision/hash. A fresh coordinator should resume from these files without reconstructing the conversation. If running sequentially, use the same file-based batch protocol. Before promoting an old worker result, confirm its source versions and relevant constraints have not changed; otherwise recheck or rerun that batch.
+
+## Freshness and maintenance
+
+Choose review timing from volatility and consequence; do not assign every claim the same interval. Revisit when underlying sources, schemas, policies, owners, strategic goals, or important incidents change. Reading a page or regenerating its wording does not refresh verification. A due date passing means stale, not false. Source removal or lost access is recorded separately from refutation.
+
+Offer an optional daily inbox check that exits quietly when there is no new intake. Daily checking does not imply daily human review. Keep human review at session end initially, with on-demand or weekly alternatives. Record the desired schedule separately from installed automation; do not configure a scheduler without the requested environment and authority. Each run should be bounded and avoid overlapping integration writers through the available job/repository coordination mechanism.
+
+Knowledge retention is append-only by default, with supersession and archive paths. An explicit privacy/deletion requirement can override retention; document affected provenance and follow the requested removal rather than promising absolute immutability.

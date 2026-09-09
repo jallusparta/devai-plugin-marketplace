@@ -1,0 +1,4 @@
+interface:
+  display_name: "Curate Knowledge Base"
+  short_description: "Curate project knowledge with evidence and review"
+  default_prompt: "Use $curate to initialize or maintain this project’s knowledge base."

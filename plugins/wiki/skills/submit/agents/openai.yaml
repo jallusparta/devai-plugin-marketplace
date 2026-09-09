@@ -1,0 +1,4 @@
+interface:
+  display_name: "Submit Knowledge"
+  short_description: "Capture evidence-linked findings in the project inbox"
+  default_prompt: "Use $submit for this project."
