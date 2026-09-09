@@ -5,7 +5,7 @@ Lightweight specification skills for turning rough ideas, product requests, and 
 The plugin keeps the workflow intentionally small:
 
 - `/spec:intent` - clarify the problem, business context, desired outcome, and success signal.
-- `/spec:design` - define product behavior, requirements, acceptance criteria, edge cases, and constraints.
+- `/spec:design` - define product behavior, observable requirements, customer scenarios, edge cases, and scope boundaries.
 - `/spec:bug` - capture bug impact, reproduction, expected behavior, environment, and useful fix guardrails.
 
 ## Workflow

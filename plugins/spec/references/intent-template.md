@@ -56,3 +56,4 @@ Optional sections for large intent:
 - Use product-provided metrics directly. Mark inferred metrics as proposed.
 - Do not include tasks, file paths, classes, implementation phases, or detailed acceptance criteria.
 - If the output feels complete enough to implement from, it is too detailed for intent.
+- For an epic or project, propose child issues when the scope contains independently valuable or implementable outcomes.

@@ -33,6 +33,7 @@ Bug signals include raw translation keys shown to users, missing localization, r
 6. Do not write requirements, acceptance criteria, or implementation tasks in the intent stage.
 7. Ask only for missing information that blocks a meaningful intent. Prefer drafting with explicit assumptions over over-interviewing.
 8. If a metric comes from product/user input, use it directly. If you invent or infer a metric, label it as proposed.
+9. For an epic or project, propose smaller child issues when the scope contains independently valuable or implementable outcomes.
 
 ## Brevity Rules
 

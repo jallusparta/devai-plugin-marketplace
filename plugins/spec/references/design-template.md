@@ -22,10 +22,11 @@ Use for one coherent change with a few behaviors and low ambiguity.
 
 Optional sections for small design:
 
-- `## Acceptance criteria` only when done checks are clearer than requirements.
 - `## Scenario` only when one example clarifies non-obvious behavior.
+- `## Edge cases` when a boundary condition needs an explicit expected result.
 - `## Constraints` only when there is a real guardrail.
-- `## References` when a link or artifact is needed to understand, implement, or review the issue.
+- `## Out of scope` when a plausible interpretation needs to be excluded.
+- `## References` directly after `## Overview` when a design, diagram, document, or other source helps people understand the issue.
 
 ## Medium Or Large Design
 
@@ -40,33 +41,36 @@ Use when there are several behaviors, edge cases, platforms, systems, or high-ri
 
 ## Requirements
 
-- The system MUST ...
-- The system SHOULD ...
-- The system MAY ...
+- [ ] <Observable requirement>
+- [ ] <Observable requirement>
 ```
 
 Optional sections for medium or large design:
 
 - `## Success metrics` only when not already captured in intent, or when the design changes the measurable outcome.
-- `## Acceptance criteria` when completion checks are clearer outside requirements.
-- `## Scenarios` when 1-2 examples clarify behavior, edge cases, or errors.
+- `## Scenarios` when examples clarify important customer flows, behavior, edge cases, or errors.
+- `## Edge cases` when boundary conditions need explicit expected results.
 - `## Non-functional requirements` when performance, accessibility, security, reliability, observability, or compliance requirements materially affect product behavior.
 - `## Constraints` for guardrails that narrow valid solutions.
 - `## Out of scope` when scope boundaries matter.
-- `## References` when links or artifacts are needed to understand, implement, or review the issue.
+- `## References` directly after `## Overview` when a design, diagram, document, or other source helps people understand the issue.
 
-## Requirements Vs Acceptance Criteria
+## Requirements And Acceptance
 
-- Requirements define what the system must do.
-- Acceptance criteria define how reviewers decide the issue is done.
-- Omit acceptance criteria when they only repeat requirements.
+- Write requirements as observable checklist items that also define how reviewers decide the issue is done.
+- Do not add a separate acceptance criteria section when it would repeat the requirements.
 - Include product-relevant testing or monitoring expectations only when they describe observable behavior, review expectations, or user/business risk.
+
+## Grouping
+
+- Keep requirements in one flat list by default.
+- Group requirements under descriptive behavior headings only when there are more than 12 criteria and at least three coherent groups.
+- Do not create headings for groups containing only one or two criteria.
 
 ## Writing Rules
 
 - Use plain bullets for small issues.
-- Use MUST/SHOULD/MAY for medium and large issues only when strictness matters.
-- If every requirement is a MUST, remove the keyword unless it adds real prioritization signal.
 - Use product-provided metrics directly. Mark inferred metrics as proposed.
 - Prefer a short useful issue over a complete-looking issue.
+- Preserve every meaningful decision while removing repetition and filler.
 - Keep implementation details out of the design body.
